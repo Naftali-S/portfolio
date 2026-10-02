@@ -221,6 +221,113 @@ a {
     color: var(--color-surface);
 }
 
+/* === Resume page === */
+.resume {
+    max-width: 850px;
+    margin: 2rem auto;
+    padding: 2.5rem 3rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.resume header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.resume h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    color: var(--color-primary);
+}
+
+.contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.75rem;
+    list-style: none;
+    margin: 0.5rem 0 1rem;
+    padding: 0;
+    color: var(--color-muted);
+}
+
+.contact li + li::before {
+    content: "|";
+    margin-right: 0.75rem;
+    color: var(--color-border);
+}
+
+.summary {
+    margin: 0;
+    text-align: left;
+    color: var(--color-muted);
+}
+
+.resume h2 {
+    margin: 1.5rem 0 0.75rem;
+    padding-bottom: 0.2rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.entry {
+    margin-bottom: 1rem;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+}
+
+.resume h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.role {
+    font-weight: normal;
+}
+
+.meta {
+    font-style: italic;
+    color: var(--color-muted);
+}
+
+.entry p {
+    margin: 0.3rem 0;
+}
+
+.entry ul {
+    margin: 0.3rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.entry li {
+    margin-bottom: 0.2rem;
+}
+
+.skills dt {
+    float: left;
+    margin-right: 0.4rem;
+    font-weight: 700;
+}
+
+.skills dt::after {
+    content: ":";
+}
+
+.skills dd {
+    margin: 0 0 0.3rem;
+}
+
 /* === Layout container === */
 .site-header,
 .hero,
@@ -246,5 +353,16 @@ a {
 
     .hero h1 {
         font-size: 2rem;
+    }
+
+        .resume {
+        margin: 0;
+        padding: 1.25rem;
+        border: none;
+        border-radius: 0;
+    }
+
+    .entry-header {
+        flex-direction: column;
     }
 }
