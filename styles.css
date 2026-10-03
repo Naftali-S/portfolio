@@ -1,0 +1,446 @@
+/* === Design Tokens === */
+:root {
+    --color-primary: #1a4d8f;
+    --color-accent: #0f766e;
+    --color-text: #1f2937;
+    --color-muted: #4b5563;
+    --color-border: #e5e7eb;
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-footer: #0f172a;
+    --color-footer-text: #cbd5e1;
+    --color-accent-light: #f0fdfa;
+    --color-accent-border: #99f6e4;
+    --color-header-bg: #cbd5e1;
+
+    --font-main: "Inter", Arial, sans-serif;
+    --radius: 8px;
+}
+
+/* === Base === */
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+}
+
+
+a {
+    color: var(--color-primary);
+}
+
+/* === Header + Nav === */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background-color: var(--color-header-bg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.nav-list {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    color: var(--color-text);
+    text-decoration: none;
+    padding-bottom: 0.25rem;
+}
+
+.nav-list a:hover,
+/*groups 2 selectors to share 1 rule*/
+.nav-list a.active {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+/* === Hero === */
+.hero {
+    padding: 4rem 2rem;
+    background-color: var(--color-surface);
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-accent);
+}
+
+.hero h1 {
+    margin: 0.25rem 0 0.5rem;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+}
+
+.tagline {
+    max-width: 550px;
+    margin: 0 0 1.5rem;
+    font-size: 1.1rem;
+    color: var(--color-muted);
+}
+
+/* === Buttons === */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    text-decoration: none;
+    border: 2px solid var(--color-primary);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+}
+
+.btn+.btn {
+    /*A button that comes after another button*/
+    margin-left: 0.5rem;
+}
+
+/* === Projects ===*/
+.projects {
+    padding: 3rem 2rem;
+}
+
+.projects h2 {
+    margin: 0 0 1.5rem;
+    color: var(--color-primary);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    /*fi tas many columns as possible with min 260px and equally 
+    distributed leftover space*/
+}
+
+/* === Card === */
+.card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+}
+
+.card-img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    margin: 0 0 0.5rem;
+}
+
+.card p {
+    margin: 0 0 1rem;
+    color: var(--color-muted);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tags li {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    color: var(--color-accent);
+    background-color: var(--color-accent-light);
+    border: 1px solid var(--color-accent-border);
+}
+
+/* === Footer === */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1.5rem 2rem;
+    background-color: var(--color-footer);
+    color: var(--color-footer-text);
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links a {
+    color: var(--color-footer-text);
+}
+
+.footer-links a:hover {
+    color: var(--color-surface);
+}
+
+/* === Resume page === */
+.resume {
+    max-width: 850px;
+    margin: 2rem auto;
+    padding: 2.5rem 3rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.resume header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.resume h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    color: var(--color-primary);
+}
+
+.contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.75rem;
+    list-style: none;
+    margin: 0.5rem 0 1rem;
+    padding: 0;
+    color: var(--color-muted);
+}
+
+.contact li + li::before {
+    content: "|";
+    margin-right: 0.75rem;
+    color: var(--color-border);
+}
+
+.summary {
+    margin: 0;
+    text-align: left;
+    color: var(--color-muted);
+}
+
+.resume h2 {
+    margin: 1.5rem 0 0.75rem;
+    padding-bottom: 0.2rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.entry {
+    margin-bottom: 1rem;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+}
+
+.resume h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.role {
+    font-weight: normal;
+}
+
+.meta {
+    font-style: italic;
+    color: var(--color-muted);
+}
+
+.entry p {
+    margin: 0.3rem 0;
+}
+
+.entry ul {
+    margin: 0.3rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.entry li {
+    margin-bottom: 0.2rem;
+}
+
+.skills dt {
+    float: left;
+    margin-right: 0.4rem;
+    font-weight: 700;
+}
+
+.skills dt::after {
+    content: ":";
+}
+
+.skills dd {
+    margin: 0 0 0.3rem;
+}
+
+/* === Projects page === */
+.page-intro {
+    padding-top: 3rem;
+}
+
+.page-intro h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+}
+
+.project-detail {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+}
+
+.project-detail .card-img {
+    margin-bottom: 0;
+}
+
+.project-info h2 {
+    margin: 0 0 0.25rem;
+}
+
+.project-info h3 {
+    margin: 1rem 0 0.25rem;
+    font-size: 1rem;
+    color: var(--color-primary);
+}
+
+.project-info ul:not(.tags) {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+}
+
+.project-info .btn {
+    margin-top: 1rem;
+}
+
+.project-figure {
+    max-width: 750px;
+    margin: 0 auto 2.5rem;
+}
+
+.project-figure img {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.project-figure figcaption {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+}
+
+/* === Layout container === */
+.site-header,
+.page-intro,
+.hero,
+.projects,
+.site-footer {
+    padding-left: max(2rem, calc((100% - 1100px) / 2));
+    padding-right: max(2rem, calc((100% - 1100px) / 2));
+}
+
+/* === Phones === */
+@media screen and (max-width: 600px) {
+
+    .site-header,
+    .site-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero,
+    .projects {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+        .resume {
+        margin: 0;
+        padding: 1.25rem;
+        border: none;
+        border-radius: 0;
+    }
+
+    .entry-header {
+        flex-direction: column;
+    }
+
+        .page-intro {
+        padding: 2rem 1.25rem 0;
+    }
+
+    .project-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .contact {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact li + li::before {
+        content: none;
+    }
+}
