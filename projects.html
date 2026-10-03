@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naftali Segal | Projects</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- === Header + Nav === -->
+    <header class="site-header">
+      <a href="index.html" class="logo">Naftali Segal</a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="mailto:naftalisegals@gmail.com">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- === Page intro === -->
+      <section class="page-intro">
+        <h1>Projects</h1>
+        <p class="tagline">
+          Things I've built, from personal tools to academic projects.
+        </p>
+      </section>
+
+      <!-- === Projects list === -->
+      <section class="projects">
+        <article class="card project-detail">
+          <img
+            src="images/scraper.png"
+            alt="Internship Digest email listing new postings"
+            class="card-img"
+          />
+          <div class="project-info">
+            <h2>Internship Scraper</h2>
+            <p class="meta">Personal project &middot; 2026 &ndash; Present</p>
+            <p>
+              A Python tool that checks 52 companies across 11 job-board
+              platforms every day and emails me only the new internship
+              postings in Ottawa, Kanata and remote-Canada.
+            </p>
+            <h3>What I did</h3>
+            <ul>
+              <li>
+                Reverse-engineered each platform's JSON API using browser dev
+                tools, so no browser automation or HTML scraping is needed.
+              </li>
+              <li>
+                Stored results in a SQLite database committed to the repo, so
+                each run knows what's already been seen.
+              </li>
+              <li>
+                Automated it with GitHub Actions to run daily and send a digest
+                email.
+              </li>
+            </ul>
+            <ul class="tags">
+              <li>Python</li>
+              <li>GitHub Actions</li>
+              <li>SQLite</li>
+            </ul>
+            <a
+              href="https://github.com/Naftali-S/internship-scraper"
+              target="_blank"
+              class="btn btn-secondary"
+              >View on GitHub</a
+            >
+          </div>
+        </article>
+        <figure class="project-figure">
+          <img
+            src="images/scraper-actions.png"
+            alt="GitHub Actions run of the scraper completing in 57 seconds"
+          />
+          <figcaption>
+            A daily GitHub Actions run: scans all 52 companies in under a
+            minute.
+          </figcaption>
+        </figure>
+
+        <article class="card project-detail">
+          <img
+            src="images/cacard-logo.png"
+            alt="CaCard app logo"
+            class="card-img"
+          />
+          <div class="project-info">
+            <h2>CaCard: Financial Literacy App</h2>
+            <p class="meta">
+              Academic project, with a partner &middot; Feb 2024 &ndash; Sep 2024
+            </p>
+            <p>
+              An iOS app concept to help young Canadians learn about money, with
+              a payment card, recommendations and short education modules.
+            </p>
+            <h3>What I did</h3>
+            <ul>
+              <li>
+                Designed the relational database (PostgreSQL on AWS RDS) and
+                wrote the SQL for login, recommendations and education features.
+              </li>
+              <li>
+                Prototyped a SwiftUI iOS client that talks to REST endpoints on
+                AWS Lambda.
+              </li>
+              <li>
+                Documented the architecture and worked through requirements with
+                my partner. The project was paused before launch.
+              </li>
+            </ul>
+            <ul class="tags">
+              <li>SwiftUI</li>
+              <li>AWS Lambda</li>
+              <li>PostgreSQL</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <!-- === Footer === -->
+    <footer class="site-footer">  
+      <p>&copy; 2026 Naftali Segal</p>
+      <ul class="footer-links">
+        <li>
+          <a href="https://github.com/Naftali-S" target="_blank">GitHub</a>
+        </li>
+        <li>
+          <a href="https://linkedin.com/in/naftali-segal" target="_blank"
+            >LinkedIn</a
+          >
+        </li>
+        <li><a href="mailto:naftalisegals@gmail.com">Email</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
