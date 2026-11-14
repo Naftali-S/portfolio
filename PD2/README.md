@@ -123,6 +123,59 @@ All colours are defined once as CSS custom properties (design tokens) in `:root`
 }
 ```
 
+## 6. Changes in PD2
+
+PD2 adds a technical write-up of my Yatzy game (`yatzy.html`). The page is built from the existing design system: page intro, cards, tech tags, buttons, figures, the resume's skills list, header and footer. **No colours, fonts or design tokens were added or changed.** Every new style uses the existing tokens from section 5.
+
+The new pieces below were added because the Yatzy write-up needed things PD1 didn't have (a table, code samples), or because building the page showed a problem in the PD1 CSS.
+
+### New components
+
+#### Data table
+
+- **Used for:** the Yatzy API endpoint table.
+- **Design:** white surface with a light border, a pale teal header row (`--color-accent-light`) with navy headings (`--color-primary`), and a thin line between rows. The caption sits above in grey (`--color-muted`).
+- **Phones:** the table sits in a `.table-wrap` wrapper that scrolls sideways, so a wide table never pushes the page wider than the screen.
+- **Classes:** `.table-wrap`, `.data-table`
+
+![Data table](design/data-table.png)
+
+#### Code
+
+- **Inline code** (any `<code>` element in a sentence): monospace font with a light grey tint (`--color-bg`), so names like `fetch` stand out from the text.
+- **Code block** (`.code-block`): a dark panel for JSON samples. It reuses the footer's colours (`--color-footer` background, `--color-footer-text` text), so it needs no new colour. Long lines scroll instead of breaking the layout.
+
+![Code block](design/code-block.png)
+
+#### Skip link
+
+- **Used for:** keyboard and screen reader users. It is the first link on every page and jumps past the navigation to the main content (`<main id="main">`).
+- **Design:** hidden off screen until it receives keyboard focus, then appears in the top-left corner as a navy button over the header. Mouse users never see it.
+- **Why off screen and not `display: none`:** `display: none` would also remove it from the Tab order, so keyboard users couldn't reach it.
+- **Class:** `.skip-link`
+
+![Skip link shown after pressing Tab](design/skip-link.png)
+
+### New modifiers
+
+Modifiers change one existing component instead of creating a new one.
+
+| Modifier | Added to | What it does |
+| --- | --- | --- |
+| `.figure-narrow` | `.project-figure` | Caps the figure at 320px, so a tall phone screenshot doesn't fill the whole screen |
+| `.card-grid-pairs` | `.card-grid` | Always two columns (one on phones). Four cards in the normal three-column grid left one card alone on the last row |
+
+![Two-column card grid](design/card-grid-pairs.png)
+
+### Changed
+
+- **Button spacing.** PD1 spaced buttons with `.btn + .btn { margin-left: 0.5rem; }`. On phones the buttons wrap onto two lines, and that rule only adds space to the side, so the stacked buttons touched. It is replaced by a `.hero-buttons` group (`display: flex; flex-wrap: wrap; gap: 0.5rem;`), which spaces buttons both side by side and when stacked. The home page hero already used the `hero-buttons` class but it had no styles, so this also fixes the home page.
+
+![Buttons stacked on a phone, with space between them](design/buttons-mobile.png)
+
+- **Section spacing.** PD2 pages stack grids, cards and figures in one section, so each now gets a 1.5rem gap below it instead of touching. When two sections follow each other, the second drops its top padding, so the gap between them is 3rem instead of 6rem.
+- **Navigation.** The Yatzy page has no nav item of its own. "Projects" is marked active on it, because Yatzy is one of my projects, and it is linked from the Home and Projects pages.
+
 ---
 
 ## Conclusion
