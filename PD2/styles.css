@@ -122,9 +122,15 @@ a {
     color: var(--color-primary);
 }
 
-.btn+.btn {
-    /*A button that comes after another button*/
-    margin-left: 0.5rem;
+/* Button group (changed in PD2): buttons sit in a row and wrap onto a new
+   line on narrow screens. gap spaces them sideways AND when they wrap;
+   the old .btn + .btn margin-left only spaced them sideways, so on phones
+   the wrapped buttons touched. */
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 /* === Projects ===*/
@@ -253,7 +259,7 @@ a {
     color: var(--color-muted);
 }
 
-.contact li + li::before {
+.contact li+li::before {
     content: "|";
     margin-right: 0.75rem;
     color: var(--color-border);
@@ -388,6 +394,101 @@ a {
     color: var(--color-muted);
 }
 
+/* === Narrow figure (PD2) === */
+/* Modifier for .project-figure. Tall phone screenshots would fill the whole
+   screen at the normal 750px width, so this caps them at phone size. */
+.figure-narrow {
+    max-width: 320px;
+}
+
+/* === Data table (PD2) === */
+/* Used for the Yatzy API endpoint table. */
+
+/* Wrapper: lets a wide table scroll sideways on small phones
+   instead of pushing the page wider than the screen */
+.table-wrap {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* single lines between cells, not double borders */
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+.data-table caption {
+    text-align: left;
+    padding-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Header row uses the same pale teal as the tech tags */
+.data-table th {
+    background-color: var(--color-accent-light);
+    color: var(--color-primary);
+}
+
+/* === Code (PD2) === */
+/* Inline code inside sentences: light tint so names like fetch stand out */
+code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.9em;
+    background-color: var(--color-bg);
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+}
+
+/* Code block: dark panel for JSON samples. Reuses the footer's dark navy. */
+.code-block {
+    background-color: var(--color-footer);
+    color: var(--color-footer-text);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    /* long lines scroll instead of breaking the layout */
+    line-height: 1.5;
+    margin: 0 0 1.5rem;
+}
+
+/* Reset the inline code style inside the block, so the panel looks uniform */
+.code-block code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+/* === Section spacing (PD2) === */
+/* PD2 pages stack grids, cards and figures in one section,
+   so give each a gap below it instead of letting them touch */
+.projects .card-grid,
+.projects>.card {
+    margin-bottom: 1.5rem;
+}
+
+/* Two sections in a row: drop the second one's top padding,
+   so the gap is 3rem instead of 6rem */
+.projects+.projects {
+    padding-top: 0;
+}
+
+/* === Two-column card grid (PD2) === */
+/* Modifier for .card-grid. Four cards in three columns leave one alone
+   on the last row, so these grids always use two columns (2 x 2). */
+.card-grid-pairs {
+    grid-template-columns: repeat(2, 1fr);
+}
+
 /* === Layout container === */
 .site-header,
 .page-intro,
@@ -416,7 +517,7 @@ a {
         font-size: 2rem;
     }
 
-        .resume {
+    .resume {
         margin: 0;
         padding: 1.25rem;
         border: none;
@@ -427,7 +528,7 @@ a {
         flex-direction: column;
     }
 
-        .page-intro {
+    .page-intro {
         padding: 2rem 1.25rem 0;
     }
 
@@ -440,7 +541,12 @@ a {
         align-items: center;
     }
 
-    .contact li + li::before {
+    .contact li+li::before {
         content: none;
+    }
+
+    /* Two-column grids stack to one column on phones */
+    .card-grid-pairs {
+        grid-template-columns: 1fr;
     }
 }
