@@ -42,6 +42,54 @@
       <section class="projects">
         <article class="card project-detail">
           <img
+            src="images/yatzy-board.png"
+            alt="Yatzy game board with dice on a green felt table and a parchment scorecard"
+            class="card-img"
+          />
+          <div class="project-info">
+            <h2>Yatzy</h2>
+            <p class="meta">
+              CST3106 &middot; Assignments 1 and 2 &middot; Fall 2026
+            </p>
+            <p>
+              A single-player Yatzy game, built first as a browser-only app and
+              then rebuilt so a Node.js and Express server runs the game.
+            </p>
+            <h3>What I did</h3>
+            <ul>
+              <li>
+                Split the game into Dice, YatzyEngine and YatzyGame classes,
+                with 100 automated tests.
+              </li>
+              <li>
+                Built a REST API in Express that rolls the dice, scores every
+                box and stores each game on the server.
+              </li>
+              <li>
+                Connected the page to the API with the Fetch API and
+                async/await.
+              </li>
+            </ul>
+            <ul class="tags">
+              <li>JavaScript</li>
+              <li>Node.js</li>
+              <li>Express</li>
+              <li>REST API</li>
+            </ul>
+            <!-- Two buttons, so they go in the button group (spaced and wraps on phones) -->
+            <div class="hero-buttons">
+              <a href="yatzy.html" class="btn btn-primary">Read the write-up</a>
+              <a
+                href="https://github.com/Naftali-S/yatzy"
+                target="_blank"
+                class="btn btn-secondary"
+                >View on GitHub</a
+              >
+            </div>
+          </div>
+        </article>
+        <article class="card project-detail">
+          <img
             src="images/scraper.png"
             alt="Internship Digest email listing new postings"
             class="card-img"
@@ -51,8 +99,8 @@
             <p class="meta">Personal project &middot; 2026 &ndash; Present</p>
             <p>
               A Python tool that checks 52 companies across 11 job-board
-              platforms every day and emails me only the new internship
-              postings in Ottawa, Kanata and remote-Canada.
+              platforms every day and emails me only the new internship postings
+              in Ottawa, Kanata and remote-Canada.
             </p>
             <h3>What I did</h3>
             <ul>
@@ -102,7 +150,8 @@
           <div class="project-info">
             <h2>CaCard: Financial Literacy App</h2>
             <p class="meta">
-              Academic project, with a partner &middot; Feb 2024 &ndash; Sep 2024
+              Academic project, with a partner &middot; Feb 2024 &ndash; Sep
+              2024
             </p>
             <p>
               An iOS app concept to help young Canadians learn about money, with
@@ -131,11 +180,10 @@
           </div>
         </article>
       </section>
-
     </main>
 
     <!-- === Footer === -->
-    <footer class="site-footer">  
+    <footer class="site-footer">
       <p>&copy; 2026 Naftali Segal</p>
       <ul class="footer-links">
         <li>
