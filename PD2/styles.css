@@ -489,6 +489,31 @@ code {
     grid-template-columns: repeat(2, 1fr);
 }
 
+/* === Skip link (PD2) === */
+/* Moved off screen instead of display: none, because display: none would
+   also remove it from the Tab order, and keyboard users couldn't reach it */
+.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* When tabbed to, it appears in the top-left corner as a navy button */
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border-radius: var(--radius);
+    z-index: 10; /* sits above the header */
+}
+
 /* === Layout container === */
 .site-header,
 .page-intro,

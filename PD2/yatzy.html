@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Skip link: first thing keyboard users reach; jumps past the nav to the content -->
+    <a href="#main" class="skip-link">Skip to main content</a>
     <!-- === Header + Nav === -->
     <!-- Same header as every page. "Projects" is marked active because Yatzy is one of my projects. -->
     <header class="site-header">
@@ -32,7 +34,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <!-- === Page intro === -->
       <section class="page-intro">
         <p class="eyebrow">CST3106 &middot; Assignments 1 and 2</p>
@@ -453,6 +455,71 @@
               Games are kept in memory, so a restart clears them. If the page's
               game no longer exists (404), it starts a new game and tells the
               player instead of breaking.
+            </p>
+          </article>
+        </div>
+      </section>
+            <!-- === Beyond Yatzy === -->
+      <!-- Other course topics I learned but didn't need for the game (PD2 requirement) -->
+      <section class="projects" aria-labelledby="beyond-heading">
+        <h2 id="beyond-heading">Beyond Yatzy: what else I learned in CST3106</h2>
+        <p>
+          Not every topic from the course fit into the game. These are the
+          other technologies and practices I learned along the way.
+        </p>
+        <div class="card-grid card-grid-pairs">
+          <article class="card">
+            <h3>Git and GitHub collaboration</h3>
+            <p>
+              Each lab was built on its own branch and merged through a pull
+              request reviewed by a classmate. In a three-person team exercise,
+              I rebased onto teammates' work and resolved merge conflicts.
+            </p>
+          </article>
+          <article class="card">
+            <h3>CSS preprocessors (SCSS)</h3>
+            <p>
+              SCSS adds variables and nesting to CSS, then compiles to normal
+              CSS. For this portfolio I used plain CSS custom properties
+              instead, which give me reusable design tokens without a build
+              step.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Accessibility standards</h3>
+            <p>
+              WCAG's four principles (perceivable, operable, understandable,
+              robust) and its A, AA and AAA levels, including the 4.5:1
+              contrast minimum for AA. Also the rules for using ARIA, and why
+              focus outlines must never be removed.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Applied here: a skip link</h3>
+            <p>
+              Press Tab on any page of this portfolio and a "Skip to main
+              content" link appears first. Keyboard and screen reader users
+              can jump past the navigation straight to the content. It stays
+              hidden until it receives focus.
+            </p>
+          </article>
+          <article class="card">
+            <h3>AJAX and API testing</h3>
+            <p>
+              Before fetch, requests were sent with <code>XMLHttpRequest</code>
+              and its <code>readyState</code> values, or with jQuery's
+              <code>$.get()</code> and <code>$.post()</code>. I also learned
+              how to use Postman to test an API: collections, variables, API
+              key headers, and full CRUD requests (GET, POST, PATCH, DELETE).
+            </p>
+          </article>
+          <article class="card">
+            <h3>Web architecture</h3>
+            <p>
+              MVC splits an app into Model (data and rules), View (the
+              interface) and Controller (input handling). I also learned why
+              Node can serve many requests at once without blocking, and how
+              its event emitters and streams work.
             </p>
           </article>
         </div>
