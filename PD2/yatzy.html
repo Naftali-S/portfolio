@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Technical write-up of my Yatzy game: a browser version (Assignment 1) and a Node.js and Express server version (Assignment 2)."
+    />
+    <title>Naftali Segal | Yatzy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Skip link: first thing keyboard users reach; jumps past the nav to the content -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <!-- === Header + Nav === -->
+    <!-- Same header as every page. "Projects" is marked active because Yatzy is one of my projects. -->
+    <header class="site-header">
+      <a href="index.html" class="logo">Naftali Segal</a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="mailto:naftalisegals@gmail.com">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- === Page intro === -->
+      <section class="page-intro">
+        <p class="eyebrow">CST3106 &middot; Assignments 1 and 2</p>
+        <h1>Yatzy</h1>
+        <p class="tagline">
+          A single-player Yatzy game I built twice: first as a browser-only app,
+          then rebuilt so a Node.js and Express server runs the game and the
+          browser only draws it.
+        </p>
+        <ul class="tags">
+          <li>JavaScript (ES modules)</li>
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>REST API</li>
+          <li>Fetch API</li>
+          <li>jQuery</li>
+          <li>CSS Grid &amp; Flexbox</li>
+        </ul>
+        <!-- Two buttons: one primary action, one secondary (design system rule) -->
+        <div class="hero-buttons">
+          <a
+            href="https://github.com/Naftali-S/yatzy"
+            target="_blank"
+            class="btn btn-primary"
+            >View the code on GitHub</a
+          >
+          <a href="projects.html" class="btn btn-secondary">Back to projects</a>
+        </div>
+      </section>
+
+      <!-- === Overview === -->
+      <section class="projects" aria-labelledby="overview-heading">
+        <h2 id="overview-heading">Overview</h2>
+        <p>
+          Players roll five dice up to three times per turn, keeping any dice
+          they like between rolls, then score the result in one of 15 boxes.
+          After 15 rounds the game ends and the scorecard is totalled, with a
+          50-point bonus for 63 or more in the upper section.
+        </p>
+        <figure class="project-figure">
+          <img
+            src="images/yatzy-board.png"
+            alt="Yatzy game board: five dice on a green felt table with two dice kept, and a parchment scorecard showing a preview of 8 points for One Pair"
+          />
+          <figcaption>
+            Round 8: two fours are kept, and the scorecard previews what the
+            dice would score in each open box.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- === Assignment 1 === -->
+      <section class="projects" aria-labelledby="a1-heading">
+        <h2 id="a1-heading">Assignment 1: The browser version</h2>
+
+        <!-- Two cards side by side on desktop, stacked on phones (existing card-grid component) -->
+        <div class="card-grid card-grid-pairs">
+          <article class="card">
+            <h3>Object-oriented game logic</h3>
+            <p>
+              The game is split into three classes, each in its own ES module:
+            </p>
+            <ul>
+              <li>
+                <code>Dice</code>: the five dice, which ones are kept, and
+                rolling.
+              </li>
+              <li>
+                <code>YatzyEngine</code>: the rules, the score for every box,
+                and the scorecard.
+              </li>
+              <li>
+                <code>YatzyGame</code>: rounds, turns, rolls left and totals.
+              </li>
+            </ul>
+            <p>
+              State is kept in private class fields (<code>#values</code>,
+              <code>#round</code>), so other code can only change it through the
+              class's methods.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>DOM and events</h3>
+            <p>
+              <code>main.js</code> connects the classes to the page. Each die,
+              button and score box has a click listener. After every action, the
+              page is redrawn from the game's state, so what is on screen always
+              matches the game.
+            </p>
+            <p>
+              Dice pips are created as elements and placed with CSS Grid, so one
+              die design works for all six faces.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>CSS techniques</h3>
+            <ul>
+              <li>
+                Design tokens (CSS custom properties) for the felt, brass and
+                parchment colours and the fonts.
+              </li>
+              <li>Flexbox for the dice row and controls; Grid for the pips.</li>
+              <li>
+                A <code>@keyframes</code> tumble animation when dice are rolled.
+              </li>
+              <li>
+                Media queries at 900px and 480px that stack the board on smaller
+                screens.
+              </li>
+              <li>
+                <code>prefers-reduced-motion</code> turns the animation off for
+                users who ask for less motion.
+              </li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Accessibility</h3>
+            <ul>
+              <li>
+                Dice are real <code>&lt;button&gt;</code> elements, so they work
+                with the keyboard.
+              </li>
+              <li>
+                Each die's <code>aria-label</code> updates after every roll (for
+                example "Die 3 showing 5, kept"), and
+                <code>aria-pressed</code> tells screen readers whether it is
+                kept.
+              </li>
+              <li>
+                The message bar uses <code>aria-live</code>, so each new prompt
+                is read out.
+              </li>
+              <li>
+                Text colours on the parchment were checked against WCAG AA
+                contrast.
+              </li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Testing gets its own full-width card -->
+        <article class="card">
+          <h3>Testing</h3>
+          <p>
+            <code>tests/yatzy_test.js</code> runs 100 automated checks on the
+            three classes with Node, including 25 scoring cases with edge cases
+            such as four of a kind not counting as two pairs. An autoplay page
+            plays complete games on its own, and I tested manually on desktop
+            and phone sizes.
+          </p>
+        </article>
+
+        <figure class="project-figure figure-narrow">
+          <img
+            src="images/yatzy-mobile.png"
+            alt="Yatzy on a phone-sized screen, with the dice and buttons stacked above the scorecard"
+          />
+          <figcaption>
+            On phones, the media queries stack the board above the scorecard and
+            make the buttons full width.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- === Assignment 2 === -->
+      <section class="projects" aria-labelledby="a2-heading">
+        <h2 id="a2-heading">Assignment 2: Moving the game to a server</h2>
+        <p>
+          In Assignment 2, I moved the game logic from the browser to a Node.js
+          and Express server. The server rolls the dice, applies the rules,
+          calculates every score and stores each game. The browser sends the
+          player's moves with the Fetch API and redraws itself from the state
+          the server sends back.
+        </p>
+
+        <h3>How a move works</h3>
+        <ol>
+          <li>
+            The player clicks something: roll, keep a die, or score a box.
+          </li>
+          <li>
+            <code>main.js</code> calls a function in <code>api.js</code>, which
+            sends the request with <code>fetch</code> using
+            <code>async</code>/<code>await</code>.
+          </li>
+          <li>
+            The server checks the move against the rules. If it is allowed, it
+            updates the game and returns the full game state as JSON.
+          </li>
+          <li>
+            <code>main.js</code> redraws the page from that state. The browser
+            does no scoring itself.
+          </li>
+        </ol>
+
+        <h3>REST API</h3>
+        <p>
+          Each kind of move has its own endpoint, and the HTTP method matches
+          what the request does.
+        </p>
+        <!-- The wrapper lets the table scroll sideways on small phones instead of breaking the layout -->
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption>
+              Game API endpoints (base URL: /api/games)
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Method</th>
+                <th scope="col">Endpoint</th>
+                <th scope="col">What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>/api/games</code></td>
+                <td>Starts a new game (201 Created)</td>
+              </tr>
+              <tr>
+                <td><code>GET</code></td>
+                <td><code>/api/games/:id</code></td>
+                <td>Gets a game's current state</td>
+              </tr>
+              <tr>
+                <td><code>POST</code></td>
+                <td><code>/api/games/:id/roll</code></td>
+                <td>Rolls every die that isn't kept</td>
+              </tr>
+              <tr>
+                <td><code>PUT</code></td>
+                <td><code>/api/games/:id/dice/:index</code></td>
+                <td>Keeps or releases one die</td>
+              </tr>
+              <tr>
+                <td><code>PUT</code></td>
+                <td><code>/api/games/:id/scores/:category</code></td>
+                <td>Scores a box and ends the turn</td>
+              </tr>
+              <tr>
+                <td><code>DELETE</code></td>
+                <td><code>/api/games/:id</code></td>
+                <td>Ends the game and removes it</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Why these methods:</strong> <code>GET</code> only reads.
+          <code>POST</code> creates something new each time (a game, a roll).
+          <code>PUT</code> sets a value, so sending it twice gives the same
+          result. <code>DELETE</code> removes the game. Errors return the right
+          status code with a JSON message: <code>400</code> for an invalid
+          request, <code>404</code> for an unknown game, and
+          <code>409</code> for a move that breaks a rule, such as a fourth roll.
+        </p>
+
+        <figure class="project-figure">
+          <img
+            src="images/yatzy-network.png"
+            alt="Browser DevTools Network tab listing the game's fetch requests: roll, keep die and score requests, all returning status 200"
+          />
+          <figcaption>
+            DevTools Network tab during a game: every move is a
+            <code>fetch</code> request to the API.
+          </figcaption>
+        </figure>
+
+        <h3>Sample response</h3>
+        <p>
+          A real response from
+          <code>POST /api/games/:id/roll</code> (shortened). The server even
+          calculates the score previews, so the browser never needs the rules.
+        </p>
+        <!-- pre keeps the JSON's spacing and line breaks; the code-block class styles it -->
+        <pre class="code-block"><code>{
+  "currentRound": 2,
+  "rollsLeft": 1,
+  "diceValues": [1, 3, 2, 1, 3],
+  "heldDice": [false, true, false, false, true],
+  "previewScores": { "threes": 6, "onePair": 6, "twoPairs": 8, ... },
+  "totalScore": 9,
+  "isOver": false
+}</code></pre>
+
+        <div class="card-grid">
+          <article class="card">
+            <h3>Express server</h3>
+            <ul>
+              <li>
+                <code>express.json()</code> middleware reads JSON request
+                bodies.
+              </li>
+              <li>
+                <code>express.static</code> serves the page from
+                <code>public/</code>.
+              </li>
+              <li>
+                An Express Router in <code>routes/games.js</code> holds the
+                endpoints, with a shared middleware that finds the game by id.
+              </li>
+              <li>
+                An error-handling middleware returns JSON errors instead of
+                crashing.
+              </li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Game state on the server</h3>
+            <ul>
+              <li>
+                Games are stored in a <code>Map</code>, keyed by an id from
+                <code>crypto.randomUUID()</code>, so several games can run at
+                once.
+              </li>
+              <li>
+                Games idle for an hour are removed every 10 minutes, so memory
+                doesn't keep growing.
+              </li>
+              <li>
+                The browser saves the game id in <code>localStorage</code>, so
+                refreshing the page continues the same game.
+              </li>
+              <li>
+                The game logic lives outside <code>public/</code>, so players
+                can't read or change it.
+              </li>
+            </ul>
+          </article>
+        </div>
+
+        <figure class="project-figure">
+          <img
+            src="images/yatzy-server.png"
+            alt="VS Code terminal showing the Yatzy Express server running at localhost port 3000"
+          />
+          <figcaption>
+            Running the server with <code>npm start</code>.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- === Technologies === -->
+      <section class="projects" aria-labelledby="tech-heading">
+        <h2 id="tech-heading">Technologies used</h2>
+        <!-- Reuses the skills list style from the resume page -->
+        <dl class="skills card">
+          <dt>JavaScript</dt>
+          <dd>
+            ES modules, classes with private fields, DOM manipulation and
+            events.
+          </dd>
+          <dt>JSON &amp; Fetch API</dt>
+          <dd>
+            Sending moves to the server and reading the game state it returns.
+          </dd>
+          <dt>Async JavaScript</dt>
+          <dd>
+            <code>async</code>/<code>await</code> and promises for every server
+            request.
+          </dd>
+          <dt>Node.js &amp; npm</dt>
+          <dd>Running the server and managing the Express package.</dd>
+          <dt>Express</dt>
+          <dd>
+            Routing, middleware, static files and error handling for the REST
+            API.
+          </dd>
+          <dt>jQuery</dt>
+          <dd>The dice roll animation and event handling in Assignment 2.</dd>
+          <dt>HTML &amp; CSS</dt>
+          <dd>
+            Semantic markup, ARIA, design tokens, Flexbox, Grid, animation and
+            media queries.
+          </dd>
+          <dt>Git &amp; GitHub</dt>
+          <dd>
+            Version control with small, descriptive commits for each feature.
+          </dd>
+          <dt>VS Code</dt>
+          <dd>Editor, integrated terminal and Live Server.</dd>
+        </dl>
+      </section>
+
+      <!-- === Highlights and challenges === -->
+      <section class="projects" aria-labelledby="challenges-heading">
+        <h2 id="challenges-heading">Highlights and challenges</h2>
+        <div class="card-grid card-grid-pairs">
+          <article class="card">
+            <h3>Keeping the server in charge</h3>
+            <p>
+              The server checks every move, not just the page. Requests sent
+              straight to the API that break a rule, such as a fourth roll or
+              scoring a used box, are refused with a 409.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Double clicks</h3>
+            <p>
+              While a request is in progress, the page ignores more clicks, so a
+              double click can't send the same move twice.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Animation and server timing</h3>
+            <p>
+              The dice tumble while the server rolls. The real values only
+              appear once both the animation and the response have finished.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Server restarts</h3>
+            <p>
+              Games are kept in memory, so a restart clears them. If the page's
+              game no longer exists (404), it starts a new game and tells the
+              player instead of breaking.
+            </p>
+          </article>
+        </div>
+      </section>
+            <!-- === Beyond Yatzy === -->
+      <!-- Other course topics I learned but didn't need for the game (PD2 requirement) -->
+      <section class="projects" aria-labelledby="beyond-heading">
+        <h2 id="beyond-heading">Beyond Yatzy: what else I learned in CST3106</h2>
+        <p>
+          Not every topic from the course fit into the game. These are the
+          other technologies and practices I learned along the way.
+        </p>
+        <div class="card-grid card-grid-pairs">
+          <article class="card">
+            <h3>Git and GitHub collaboration</h3>
+            <p>
+              Each lab was built on its own branch and merged through a pull
+              request reviewed by a classmate. In a three-person team exercise,
+              I rebased onto teammates' work and resolved merge conflicts.
+            </p>
+          </article>
+          <article class="card">
+            <h3>CSS preprocessors (SCSS)</h3>
+            <p>
+              SCSS adds variables and nesting to CSS, then compiles to normal
+              CSS. For this portfolio I used plain CSS custom properties
+              instead, which give me reusable design tokens without a build
+              step.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Accessibility standards</h3>
+            <p>
+              WCAG's four principles (perceivable, operable, understandable,
+              robust) and its A, AA and AAA levels, including the 4.5:1
+              contrast minimum for AA. Also the rules for using ARIA, and why
+              focus outlines must never be removed.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Applied here: a skip link</h3>
+            <p>
+              Press Tab on any page of this portfolio and a "Skip to main
+              content" link appears first. Keyboard and screen reader users
+              can jump past the navigation straight to the content. It stays
+              hidden until it receives focus.
+            </p>
+          </article>
+          <article class="card">
+            <h3>AJAX and API testing</h3>
+            <p>
+              Before fetch, requests were sent with <code>XMLHttpRequest</code>
+              and its <code>readyState</code> values, or with jQuery's
+              <code>$.get()</code> and <code>$.post()</code>. I also learned
+              how to use Postman to test an API: collections, variables, API
+              key headers, and full CRUD requests (GET, POST, PATCH, DELETE).
+            </p>
+          </article>
+          <article class="card">
+            <h3>Web architecture</h3>
+            <p>
+              MVC splits an app into Model (data and rules), View (the
+              interface) and Controller (input handling). I also learned why
+              Node can serve many requests at once without blocking, and how
+              its event emitters and streams work.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- === Footer === -->
+    <footer class="site-footer">
+      <p>&copy; 2026 Naftali Segal</p>
+      <ul class="footer-links">
+        <li>
+          <a href="https://github.com/Naftali-S" target="_blank">GitHub</a>
+        </li>
+        <li>
+          <a href="https://linkedin.com/in/naftali-segal" target="_blank"
+            >LinkedIn</a
+          >
+        </li>
+        <li><a href="mailto:naftalisegals@gmail.com">Email</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
